@@ -1,0 +1,39 @@
+version: '3'
+services:
+  nginx:
+    container_name: some-nginx
+    links:
+      - app
+    ports:
+      - 80:80
+      - 443:443
+    build: ./nginx
+
+  app:
+    build: ./app
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    links:
+      - db
+    command: mvn clean spring-boot:run
+
+  authentication:
+    build: ./authentication
+    working_dir: /authentication
+    volumes:
+      - ./authentication:/authentication
+    links:
+      - db
+    command: mvn clean spring-boot:run
+
+  db:
+    image: library/mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    expose:
+      - '3306'
