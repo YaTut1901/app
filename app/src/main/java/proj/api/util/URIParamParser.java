@@ -5,6 +5,9 @@ import proj.api.exceptions.WrongURIFormatException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * parser for URI with following format: /sort?param=name(order=desc),login(order=asc)
+ */
 public class URIParamParser {
     public static final String REGEX_1 = "(.*?)\\((.*?)\\)";
     public static final String REGEX_2 = "\\w";
