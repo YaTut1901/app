@@ -38,6 +38,6 @@ public class ProductController {
     @GetMapping("/sort")
     public List<Product> getUsersOrderedBy(@RequestParam String param) {
         Map<String, Map<String, String>> paramsMap = URIParamParser.parse(param);
-        return service.getUsersSortedBy(paramsMap);
+        return service.getProductSortedBy(paramsMap);
     }
 }

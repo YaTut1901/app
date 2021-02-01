@@ -30,7 +30,7 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public List<Product> getUsersSortedBy(Map<String, Map<String, String>> param) {
+    public List<Product> getProductSortedBy(Map<String, Map<String, String>> param) {
         return repository.findAll(sequencer.orderBy(param));
     }
 }
