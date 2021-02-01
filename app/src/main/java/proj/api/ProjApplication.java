@@ -3,32 +3,32 @@ package proj.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import proj.api.model.User;
-import proj.api.service.UserService;
+import proj.api.model.Product;
+import proj.api.service.ProductService;
 
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 public class ProjApplication {
-    private UserService service;
+    private ProductService service;
 
     @Autowired
-    public ProjApplication(UserService service) {
+    public ProjApplication(ProductService service) {
         this.service = service;
     }
 
     @PostConstruct
     public void init() {
-        User user_1 = new User("login_1", "1234", "name_2");
-        User user_2 = new User("login_2", "1234", "name_4");
-        User user_3 = new User("login_2", "1234", "name_3");
-        User user_4 = new User("login_2", "1234", "name_6");
-        User user_5 = new User("login_5", "1234", "name_5");
-        service.save(user_1);
-        service.save(user_2);
-        service.save(user_3);
-        service.save(user_4);
-        service.save(user_5);
+        Product product = new Product("name_1", "1234", "type_2");
+        Product product1 = new Product("name_2", "1234", "type_4");
+        Product product2 = new Product("name_3", "1234", "type_3");
+        Product product3 = new Product("name_4", "1234", "type_6");
+        Product product4 = new Product("name_5", "1234", "type_5");
+        service.save(product);
+        service.save(product1);
+        service.save(product2);
+        service.save(product3);
+        service.save(product4);
     }
 
     public static void main(String[] args) {

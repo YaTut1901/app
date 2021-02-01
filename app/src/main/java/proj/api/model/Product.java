@@ -11,17 +11,17 @@ import javax.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor
-public class User {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String login;
-    private String password;
     private String name;
+    private String manufacture;
+    private String type;
 
-    public User(String login, String password, String name) {
-        this.login = login;
-        this.password = password;
+    public Product(String name, String manufacture, String type) {
         this.name = name;
+        this.manufacture = manufacture;
+        this.type = type;
     }
 }
