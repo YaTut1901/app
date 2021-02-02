@@ -11,8 +11,6 @@ import proj.auth.service.UserService;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Arrays;
 
 
 @RequestMapping("/auth")
@@ -32,13 +30,13 @@ public class AuthController {
     }
 
     @PostMapping
-    public void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void addUser(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("user saving");
         String email = request.getParameter("email");
         String psw = request.getParameter("psw");
         service.save(new User(email, psw));
         Cookie cookie = new Cookie("AUTHORIZED", "true");
-        cookie.setMaxAge(60);
-        response.addCookie(new Cookie("AUTHORIZED", "true"));
+        cookie.setMaxAge(300);
+        response.addCookie(cookie);
     }
 }

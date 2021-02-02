@@ -17,26 +17,24 @@ import java.util.Optional;
 @Component
 @Order(1)
 public class AuthFilter implements Filter {
+    public static final String COOKIE_NAME = "AUTHORIZED";
+    public static final String REGISTRATION_URL = "http://localhost/auth";
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("filter");
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         if (validate(httpServletRequest)) {
-            System.out.println(Arrays.stream(httpServletRequest.getCookies())
-                    .filter(cookie -> cookie.getName().equals("AUTHORIZED"))
-                    .findFirst()
-                    .get().getMaxAge());
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            ((HttpServletResponse) servletResponse).sendRedirect("http://localhost/auth");
+            ((HttpServletResponse) servletResponse).sendRedirect(REGISTRATION_URL);
         }
     }
 
     private boolean validate(HttpServletRequest request) {
         Optional<Cookie[]> cookies = Optional.ofNullable(request.getCookies());
         return cookies.isPresent() && Arrays.stream(cookies.get())
-                .anyMatch(cookie -> cookie.getName().equals("AUTHORIZED"));
+                .anyMatch(cookie -> cookie.getName().equals(COOKIE_NAME));
     }
 }
 
