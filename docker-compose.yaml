@@ -15,7 +15,7 @@ services:
     volumes:
       - ./app:/app
     links:
-      - db
+      - mongodb
     command: mvn clean spring-boot:run
 
   authentication:
@@ -37,3 +37,13 @@ services:
       MYSQL_ROOT_PASSWORD: 'password'
     expose:
       - '3306'
+
+  mongodb:
+    image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+      - MONGO_INITDB_DATABASE=products
+    ports:
+        - "27017:27017"

@@ -1,6 +1,10 @@
 package proj.api.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import proj.api.model.Product;
-public interface ProductRepository extends JpaRepository<Product, Long> {
+
+import java.util.Optional;
+
+public interface ProductRepository extends MongoRepository<Product, String> {
+    Optional<Product> findByName(String name);
 }

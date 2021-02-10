@@ -25,8 +25,8 @@ public class ProductService {
         return repository.save(product);
     }
 
-    public Product get(Long id) {
-        return repository.findById(id).orElseThrow();
+    public Product getByName(String name) {
+        return repository.findByName(name).orElseThrow();
     }
 
     @Transactional(readOnly = true)
